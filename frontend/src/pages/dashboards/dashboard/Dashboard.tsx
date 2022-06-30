@@ -2,20 +2,14 @@ import React,{ useState } from 'react';
 
 import { Calendar, Card, Button, Modal } from 'antd';
 import { useHistory } from 'react-router-dom';
-import ReactEcharts from 'echarts-for-react';
-import hospitalOptions from './charts/hospital-options';
-import FullCalendar from '@fullcalendar/react';
-import { formatDate } from '@fullcalendar/core';
-import dayGrid from '@fullcalendar/daygrid';
-import { incomeInWeek, incomeInMonth } from './charts/income-options';
-import {
-  patientsGenderOptions,
-  departmentsOptions,
-  patientsAgeOptions
-} from './charts/patients-options';
 
+import FullCalendar, { formatDate } from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import AddAppointment from '../appointment/AddAppointment';
 import { useFetchPageData, usePageData } from '../../../hooks/usePage';
-
+import { useAppointments } from '../../../hooks/useAppointments';
 import { IAppointment } from '../../../interfaces/patient';
 import { IPageData } from '../../../interfaces/page';
 import { appointmentsReducer } from '../../../redux/appointments/reducer';
@@ -33,13 +27,17 @@ const pageData: IPageData = {
     }
   ]
 };
-
-const DashboardPage = () => {
+type Props = {
+  onSubmit: (appointment: IAppointment) => void;
+  visible: boolean;
+  onClose: () => void;
+};
+const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
   const [appointments] = useFetchPageData<IAppointment[]>('http://localhost:7000/appointments', []);
   usePageData(pageData);
   const [event, setEvent] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
-
+  const { addAppointment, editAppointment, deleteAppointment } = useAppointments();
 
   const start = formatDate('2018-09-01', {
     month: 'long',
@@ -56,7 +54,35 @@ const DashboardPage = () => {
     setModalVisibility(true);
   };
   const closeModal = () => setModalVisibility(false);
-  let modalBody, modalTitle, modalFooter;
+
+  const state = {
+    weekendsVisible: true,
+    currentEvents: []
+  }
+  const [addingModalVisibility, setAddingModalVisibility] = useState(false);
+  const handleDateSelect = (selectInfo) => {
+    setAddingModalVisibility(true);
+  }
+  const closeAddingModal = () => setAddingModalVisibility(false);
+  function renderEventContent(eventInfo) {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b>
+        <i>{eventInfo.event.title}</i>
+      </>
+    )
+  }
+  // const handleEventClick = (clickInfo) => {
+  //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+  //     clickInfo.event.remove()
+  //   }
+  // }
+  // const handleEvents = (events) => {
+  //   setState({
+  //     currentEvents: events
+  //   })
+  // }
+
   return (
     <>
       <div className='row'>
@@ -143,12 +169,28 @@ const DashboardPage = () => {
       
       <Card className='mb-0'>
         <FullCalendar
-          events={appointments}
+          events={appointments} 
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          }}
           initialView='dayGridMonth'
-          plugins={[ dayGrid]}
+          editable={true}
+          selectable={true}
+          selectMirror={true}
           dayMaxEvents={true}
-          weekends
+          weekends={state.weekendsVisible}
+          select={handleDateSelect}
+          eventContent={renderEventContent} // custom render function
+          eventClick={handleEventClick} 
         />
+          <AddAppointment
+          onClose={closeAddingModal}
+          visible={addingModalVisibility}
+          onSubmit={addAppointment}
+      />
       </Card>
     </>
   );
