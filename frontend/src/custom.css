@@ -1,0 +1,23 @@
+.Toastify .Toastify__progress-bar{
+    background-color: transparent !important;
+}
+.ant-picker{
+    background-color: #ebebeb;
+    box-shadow: none;
+    border: #ebebeb 1px solid;
+    border-radius: 20px;
+    display: flex;
+    flex: 1 1;
+    color: #1f2022;
+    line-height: 1.42857;
+    transition: background 0.2s ease-in-out, border 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+    will-change: background, border, box-shadow, color;
+    width: 100%;
+    padding: 8px 17.4px;
+}
+.ant-modal-wrap {
+    top: -87px;
+}
+.ant-picker.has-error {
+    border-color: #ed5564;
+}
