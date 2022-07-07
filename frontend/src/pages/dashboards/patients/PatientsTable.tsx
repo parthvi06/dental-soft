@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { ColumnProps } from 'antd/es/table';
-import { Avatar, Table, Button, Modal, Tag } from 'antd';
+import { Avatar, Table, Button, Modal, Tag, Input } from 'antd';
 
 import { IPatient } from '../../../interfaces/patient';
 import PatientForm from '../../../layout/components/patients/PatientForm';
+import { SearchOutlined } from "@ant-design/icons";
 
 type Props = {
   patients: IPatient[];
@@ -62,6 +63,7 @@ const PatientsTable = ({
     </div>
   );
 
+  
   const columns: ColumnProps<IPatient>[] = [
     {
       key: 'img',
@@ -70,28 +72,92 @@ const PatientsTable = ({
       render: (img) => <PatientImg img={img} />
     },
     {
-      key: 'name',
-      dataIndex: 'name',
-      title: 'Name',
-      sorter: (a, b) => (a.name > b.name ? 1 : -1),
-      render: (name) => <strong>{name}</strong>
+      title: "Name",
+      dataIndex: "name",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => {
+        return (
+          <>
+            <Input
+              autoFocus
+              placeholder="Type text here"
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                confirm({ closeDropdown: false });
+              }}
+              onPressEnter={() => {
+                confirm();
+              }}
+              onBlur={() => {
+                confirm();
+              }}
+            ></Input>
+            
+          </>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.name.toLowerCase().includes(value);
+      },
     },
     {
-      key: 'id',
-      dataIndex: 'id',
+      key: '_id',
+      dataIndex: '_id',
       title: 'ID',
-      sorter: (a, b) => (a.id > b.id ? 1 : -1),
-      render: (id) => (
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a._id - b._id,
+      render: (_id) => (
         <span className='nowrap' style={{ color: '#a5a5a5' }}>
-          {id}
+          KD2022#{_id}
         </span>
       )
     },
     {
       key: 'address',
-      dataIndex: ['street','city','state','pincode'],
+      dataIndex: ['house_no','street','city','state','pincode'],
       title: 'Address',
-      render: (text,row) => <span style={{ minWidth: 200, display: 'block' }}>{row["street"]} {row["city"]} {row["state"]}-{row["pincode"]}</span>
+      render: (text,row) => <span style={{ minWidth: 200, display: 'block' }}>{row["house_no"]}, {row["street"]}, {row["city"]}, {row["state"]},{row["pincode"]}</span> ,
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => {
+        return (
+          <>
+            <Input
+              autoFocus
+              placeholder="Type text here"
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                confirm({ closeDropdown: false });
+              }}
+              onPressEnter={() => {
+                confirm();
+              }}
+              onBlur={() => {
+                confirm();
+              }}
+            ></Input>
+            
+          </>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.city.toLowerCase().includes(value);
+      },
     },
     {
       key: 'number',
@@ -130,14 +196,14 @@ const PatientsTable = ({
       render: actions
     }
   ];
-
+ 
   const pagination = patients.length <= 10 ? false : {};
   return (
     <>
       <Table
         pagination={pagination}
         className='accent-header'
-        rowKey='id'
+        rowKey='_id'
         dataSource={patients}
         columns={columns}
       />

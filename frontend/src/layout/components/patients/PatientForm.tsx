@@ -20,8 +20,8 @@ type Props = {
 
 const defaultSubmitText = 'Add patient';
 const emptyPatient = {
-  id: null,
   name: null,
+  house_no: null,
   street: null,
   city: null,
   state: null,
@@ -34,8 +34,8 @@ const emptyPatient = {
 };
 
 const patientScheme = Yup.object({
-  id: Yup.string().required(),
   name: Yup.string().required('Name Required').nullable(),
+  house_no: Yup.string().required(),
   street: Yup.string().required(),
   city: Yup.string().required(),
   state: Yup.string().required(),
@@ -99,17 +99,6 @@ const PatientForm = ({
 
         <div className='form-group'>
           <Input
-            placeholder='Patient ID'
-            name='id'
-            type='text'
-            onBlur={handleBlur}
-            onChange={handleChange}
-            defaultValue={values.id}
-            className={hasError('id')}
-          />
-        </div>
-        <div className='form-group'>
-          <Input
             placeholder='Name'
             name='name'
             type='text'
@@ -122,19 +111,34 @@ const PatientForm = ({
             <div>{errors.name}</div>
           ) : null}
         </div>
-
-        <div className='form-group'>
-          <Input
-            placeholder='Street'
-            name='street'
-            type='text'
-            onBlur={handleBlur}
-            onChange={handleChange}
-            defaultValue={values.street}
-            className={hasError('street')}
-          />
+        <div className='row'>  
+          <div className='col-sm-6 col-12'>
+            <div className='form-group'>
+              <Input
+                placeholder='House/Apartment No'
+                name='house_no'
+                type='text'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                defaultValue={values.house_no}
+                className={hasError('house_no')}
+              />
+            </div>
+          </div>  
+          <div className='col-sm-6 col-12'>
+            <div className='form-group'>
+              <Input
+                  placeholder='Street'
+                  name='street'
+                  type='text'
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  defaultValue={values.street}
+                  className={hasError('street')}
+                />
+            </div>
+          </div>
         </div>
-
         <div className='row'>
           <div className='col-sm-6 col-12'>
             <div className='form-group'>

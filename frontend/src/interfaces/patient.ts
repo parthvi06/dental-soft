@@ -1,9 +1,9 @@
 export interface IPatient {
   id?: string;
-  _id?: string;
+  _id?: any;
   img?: string | ArrayBuffer;
   profileImg?: string | ArrayBuffer;
-  name: string;
+  name: string | any;
   lastName?: string;
   fullName?: string;
   number: string;
@@ -15,8 +15,9 @@ export interface IPatient {
   lastVisit?: string;
   birthDate?: string;
   email?: string;
-  street?: string;
-  city?: string;
+  house_no?: string;
+  street?: any;
+  city?: any;
   state?: string;
   pincode?: number
 }
