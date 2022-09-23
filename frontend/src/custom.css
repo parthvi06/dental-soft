@@ -21,3 +21,11 @@
 .ant-picker.has-error {
     border-color: #ed5564;
 }
+#GFG{ display: none;}
+.medic-dosage-row .col-sm-4 {
+    padding-left: 0px;
+}
+input.ant-input.medic-dosage {
+    padding-right: 0px!Important;
+    border-radius: 0px;
+}

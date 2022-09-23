@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-
-import { useHistory } from 'react-router-dom';
-
+import { useParams, useHistory } from 'react-router-dom';
 import { ColumnProps } from 'antd/es/table';
 import { Avatar, Table, Button, Modal, Tag, Input } from 'antd';
 
 import { IPatient } from '../../../interfaces/patient';
 import PatientForm from '../../../layout/components/patients/PatientForm';
 import { SearchOutlined } from "@ant-design/icons";
+import { getPatient } from '../../../redux/patients/actions';
+import { useDispatch } from 'react-redux';
 
 type Props = {
   patients: IPatient[];
   onEditPatient: (patient: IPatient) => void;
   onDeletePatient?: (id: string) => void;
+  onFetchPatient?: (patient: IPatient) => void;
 };
 
 type PatientsImgProps = {
@@ -33,16 +34,18 @@ const PatientImg = ({ img }: PatientsImgProps) => {
 const PatientsTable = ({
   patients,
   onEditPatient = () => null,
-  onDeletePatient = () => null
+  onDeletePatient = () => null,
+  onFetchPatient =() => null
 }: Props) => {
   const history = useHistory();
-
+  const dispatch = useDispatch();
+  // const id = useParams();
   const [patient, setPatient] = useState(null);
   const [visibility, setVisibility] = useState(false);
 
   const closeModal = () => setVisibility(false);
 
-  const handleShowInfo = () => history.push('/vertical/patient-profile');
+  const handleShowInfo = (id) =>{ history.push(`/vertical/patient/${id}`);  };
   const handleDeletePatient = (id) => onDeletePatient(id);
   const handleEditPatient = (patient: IPatient) => {
     setPatient(patient);
@@ -51,9 +54,9 @@ const PatientsTable = ({
 
   const actions = (patient: IPatient) => (
     <div className='buttons-list nowrap'>
-      {/* <Button shape='circle' onClick={handleShowInfo}>
+      <Button shape='circle' onClick={handleShowInfo.bind({},patient._id)}>
         <span className='icofont icofont-external-link' />
-      </Button> */}
+      </Button>
       <Button onClick={handleEditPatient.bind({}, patient,patient._id)} shape='circle' type='primary'>
         <span className='icofont icofont-edit-alt' />
       </Button>
@@ -65,12 +68,12 @@ const PatientsTable = ({
 
   
   const columns: ColumnProps<IPatient>[] = [
-    {
-      key: 'img',
-      title: 'Photo',
-      dataIndex: 'img',
-      render: (img) => <PatientImg img={img} />
-    },
+    // {
+    //   key: 'img',
+    //   title: 'Photo',
+    //   dataIndex: 'img',
+    //   render: (img) => <PatientImg img={img} />
+    // },
     {
       title: "Name",
       dataIndex: "name",
@@ -213,7 +216,7 @@ const PatientsTable = ({
         footer={null}
         onCancel={closeModal}
         destroyOnClose
-        title={<h3 className='title'>Add patient</h3>}
+        title={<h3 className='title'>Edit patient</h3>}
       >
         <PatientForm
           submitText='Update patient'

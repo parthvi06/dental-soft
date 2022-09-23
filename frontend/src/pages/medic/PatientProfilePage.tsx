@@ -1,8 +1,6 @@
-import React from 'react';
-import { Button, Card, Form, Input, Select, Timeline } from 'antd';
-
+import React, { Component } from 'react';
+import { Button, Card, Form, Input, Select, Timeline } from 'antd'
 import { useFormik } from 'formik';
-
 import { IPageData } from '../../interfaces/page';
 
 import { usePageData } from '../../hooks/usePage';
@@ -11,6 +9,9 @@ import { useGetBillings } from '../../hooks/useGetBillings';
 
 import ImageLoader from '../../layout/components/patients/ImageLoader';
 import BillingTable from './components/BillingTable';
+import axios from 'axios';
+import { getPatient } from '../../redux/patients/actions';
+
 
 const pageData: IPageData = {
   title: 'Patient profile page',

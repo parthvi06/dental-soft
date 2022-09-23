@@ -8,9 +8,56 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/').post((req, res) => {
-  const { img, name, gender, number, lastVisit, email, birthDate, house_no, street, city, state, pincode } = req.body;
+  const { img,
+          name,
+          gender, 
+          number, 
+          lastVisit, 
+          email, 
+          birthDate, 
+          house_no, 
+          street, 
+          city, 
+          state,
+          pincode, 
+          prescription, 
+          tags, 
+          surface,
+          pop,
+          top,
+          sensitivity,
+          conclusion,
+          complaint,
+          findings,
+          investigation,
+          diagnosis,
+          notes
+        } = req.body;
 
-  const newPatient = new Patient({ img, name, gender, number, lastVisit, email, birthDate, house_no, street, city, state, pincode })
+  const newPatient = new Patient({ img, 
+                                    name, 
+                                    gender, 
+                                    number, 
+                                    lastVisit, 
+                                    email, 
+                                    birthDate, 
+                                    house_no, 
+                                    street, 
+                                    city, 
+                                    state, 
+                                    pincode, 
+                                    prescription, 
+                                    surface,
+                                    pop,
+                                    top,
+                                    sensitivity,
+                                    conclusion,
+                                    complaint,
+                                    findings,
+                                    investigation,
+                                    diagnosis,
+                                    notes
+                                   })
 
   newPatient.save()
     .then(() => res.json(newPatient))
@@ -44,7 +91,26 @@ router.route('/:id').patch((req, res) => {
       patients.city = req.body.city;
       patients.state = req.body.state;
       patients.pincode = req.body.pincode;
-
+      patients.surface = req.body.surface;
+      patients.pop = req.body.pop;
+      patients.top = req.body.top;
+      patients.sensitivity = req.body.sensitivity;
+      patients.conclusion = req.body.conclusion;
+      patients.complaint = req.body.complaint;
+      patients.investigation = req.body.investigation;
+      patients.findings = req.body.findings;
+      patients.diagnosis = req.body.diagnosis;
+      patients.notes = req.body.notes;
+      patients.price = req.body.price;
+      patients.discount = req.body.discount;
+      patients.totalprice = req.body.totalprice;
+      patients.drug = req.body.drug;
+      patients.am = req.body.am;
+      patients.noon = req.body.noon;
+      patients.pm = req.body.pm;
+      patients.totalqty = req.body.totalqty;
+      patients.food = req.body.food;
+      patients.instruction = req.body.instruction;
       patients.save()
         .then(() => res.json(patients))
         .catch(err => res.status(400).json('Error: ' + err));

@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 
-import { Calendar, Card, Button, Modal } from 'antd';
+import { Calendar, Card, Button, Modal,Input } from 'antd';
 import { useHistory } from 'react-router-dom';
 
 import FullCalendar, { formatDate } from '@fullcalendar/react';
@@ -14,6 +14,7 @@ import { IAppointment } from '../../../interfaces/patient';
 import { IPageData } from '../../../interfaces/page';
 import { appointmentsReducer } from '../../../redux/appointments/reducer';
 import { fetchAppointment } from '../../../api';
+import { setConstantValue } from 'typescript';
 
 const pageData: IPageData = {
   fulFilled: false,
@@ -54,14 +55,25 @@ const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
     setModalVisibility(true);
   };
   const closeModal = () => setModalVisibility(false);
-
+  const [eventInfos, setEventInfos] = useState();
+  const [isEditCard, setIsEditCard] = useState<boolean>(false);
   const state = {
     weekendsVisible: true,
     currentEvents: []
   }
   const [addingModalVisibility, setAddingModalVisibility] = useState(false);
   const handleDateSelect = (selectInfo) => {
+    setIsEditCard(true);
+    setEventInfos(selectInfo);
     setAddingModalVisibility(true);
+    console.log(selectInfo);
+    jQuery(function() { $('.app-from').val(selectInfo.startStr);
+      $("button").on('click',function(){
+        console.log('click')
+        $('.app-from').val(selectInfo.startStr);
+      });
+     })
+    
   }
   const closeAddingModal = () => setAddingModalVisibility(false);
   function renderEventContent(eventInfo) {
@@ -86,7 +98,7 @@ const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
   return (
     <>
       <div className='row'>
-        <div className='col-12 col-md-6 col-xl-3'>
+        {/* <div className='col-12 col-md-6 col-xl-3'>
           <Card style={{ background: 'rgba(251, 251, 251)' }} className='animated with-shadow'>
             <div className='row'>
               <div className='col-5'>
@@ -164,7 +176,7 @@ const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
               </div>
             </div>
           </Card>
-        </div>
+        </div> */}
       </div>
       
       <Card className='mb-0'>
@@ -177,6 +189,7 @@ const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
           initialView='dayGridMonth'
+          navLinks= {true}
           editable={true}
           selectable={true}
           selectMirror={true}
@@ -192,6 +205,7 @@ const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
           onSubmit={addAppointment}
       />
       </Card>
+      
     </>
   );
 };

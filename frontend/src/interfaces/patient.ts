@@ -3,13 +3,13 @@ export interface IPatient {
   _id?: any;
   img?: string | ArrayBuffer;
   profileImg?: string | ArrayBuffer;
-  name: string | any;
+  name?: string | any;
   lastName?: string;
   fullName?: string;
-  number: string;
+  number?: string;
   phone?: string;
   age?: number;
-  gender: string;
+  gender?: string;
   address?: string;
   status?: string;
   lastVisit?: string;
@@ -19,9 +19,30 @@ export interface IPatient {
   street?: any;
   city?: any;
   state?: string;
-  pincode?: number
+  pincode?: number;
+  prescription?: string;
+  complaint?: any;
+  findings?: any;
+  investigation?: any;
+  diagnosis?: any;
+  notes?: any;
+  surface?: string,
+  top?: string,
+  pop?: string,
+  sensitivity?: string,
+  conclusion?: string,
+  price?: number,
+  discount?: number,
+  totalprice?: number,
+  treatment?: string,
+  drug?:string
+  am?:string,
+  noon?:string,
+  pm?:string,
+  totalqty?:string,
+  food?:string,
+  instruction?:string
 }
-
 export interface IAppointment {
   // id?: string;
   _id?: string;

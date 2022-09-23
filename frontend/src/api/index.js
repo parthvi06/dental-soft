@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const url = 'http://localhost:7000/patients';
+
+export const fetchPatientDetail = (id) => axios.get(`${url}/${id}`);
 export const fetchPatient = () => axios.get(url);
 export const createPatient = (newPatient) => axios.post(url, newPatient);
 export const deletePatient = (id) => axios.delete(`${url}/${id}`);

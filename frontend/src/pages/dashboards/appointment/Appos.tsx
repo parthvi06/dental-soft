@@ -38,7 +38,7 @@ const ApposPage = () => {
         onEditAppointment={editAppointment}
         appointments={appointments}
       />
-      <PageAction onClick={openAddingModal} icon='icofont-stethoscope-alt' type={'primary'} />
+      <PageAction onClick={openAddingModal} icon='icofont-ui-add' type={'primary'} />
       <AddAppointment
         onClose={closeAddingModal}
         visible={addingModalVisibility}

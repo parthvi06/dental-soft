@@ -13,14 +13,14 @@
   {
     "title": "Patients",
     "icon": {
-      "class": "icofont-paralysis-disability"
+      "class": "icofont-user"
     },
     "routing": "patients"
   },
   {
     "title": "Appointments",
     "icon": {
-      "class": "icofont-stethoscope-alt"
+      "class": "icofont-patient-file"
     },
     "routing": "appointments"
   },

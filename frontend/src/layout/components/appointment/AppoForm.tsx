@@ -27,10 +27,10 @@ const emptyAppointment = {
 };
 
 const appointmentScheme = Yup.object({
-  title: Yup.string().required('Name Required').nullable(),
-  number: Yup.string().required(),
-  img: Yup.string().required(),
-  email: Yup.string().email('Invalid email').required('Email Required').nullable(),
+  // title: Yup.string().required('Name Required').nullable(),
+  // number: Yup.string().required(),
+  // img: Yup.string().required(),
+  // email: Yup.string().email('Invalid email').required('Email Required').nullable(),
 });
 
 const AppoForm = ({

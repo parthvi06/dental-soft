@@ -19,6 +19,8 @@ export function usePatients() {
   const deletePatient = (id: string) => {
     return dispatch(actions.deletePatient(id));
   };
-
-  return { patients, addPatient, editPatient, deletePatient };
+  const patientInfo = (patient: IPatient) => {
+    return dispatch(actions.getPatient(patient));
+  };
+  return { patients, addPatient, editPatient, deletePatient,patientInfo };
 }

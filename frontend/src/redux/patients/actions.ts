@@ -3,6 +3,7 @@ import {
   DELETE_PATIENT,
   EDIT_PATIENT,
   SET_PATIENTS,
+  FETCH_PATIENT,
   SetPatientAction
 } from './types';
 
@@ -37,7 +38,6 @@ export const editPatient = (patients:IPatient) => async (dispatch) => {
   try {
     const { data } = await api.editPatient(patients._id,patients);
     toast.success("Patient edited!!");
-
     dispatch({ type: EDIT_PATIENT, payload: data });
   } catch (error) {
     console.log("Error on editind patient");
@@ -50,5 +50,14 @@ export const fetchPatients = () => async (dispatch) => {
     dispatch({ type: SET_PATIENTS, payload: data });
   } catch (error) {
     console.log("Error on fetch Patients");
+  }
+};
+export const getPatient = (patients:IPatient) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchPatientDetail(patients);
+    dispatch({ type: FETCH_PATIENT, payload: data });
+    console.log(patients,'hi',data);
+  } catch (error) {
+    console.log("Error ");
   }
 };

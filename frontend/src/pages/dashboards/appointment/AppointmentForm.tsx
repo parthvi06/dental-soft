@@ -34,13 +34,13 @@ const emptyAppointment = {
 
 const appointmentSchema = Yup.object().shape({
   // start: Yup.string().required(),
-  doctor: Yup.string().required(),
-  email: Yup.string().required(),
-  injury: Yup.string().required(),
-  title: Yup.string().required(),
-  number: Yup.string().required(),
-  from: Yup.string().required(),
-  to: Yup.string().required()
+  // doctor: Yup.string().required(),
+  // email: Yup.string().required(),
+  // injury: Yup.string().required(),
+  // title: Yup.string().required(),
+  // number: Yup.string().required(),
+  // from: Yup.string().required(),
+  // to: Yup.string().required()
 });
 
 const AppointmentForm = ({
@@ -63,7 +63,7 @@ const AppointmentForm = ({
     validationSchema: appointmentSchema,
     initialValues: appointment,
     onSubmit: (form) => {
-      onSubmit({ ...form, start: `${form.date}T${form.from}`,fromTo: `${form.from} - ${form.to}` });
+      onSubmit({ ...form });
       onCancel();
     }
   });
@@ -92,7 +92,7 @@ const AppointmentForm = ({
             onBlur={handleBlur}
             onChange={handleChange}
             defaultValue={values.title}
-            className={hasError('title')}
+            className='title'
           />
         </div>
 
@@ -107,19 +107,7 @@ const AppointmentForm = ({
           />
         </div>
 
-        <div className='form-group'>
-          <Input
-            defaultValue={values.email}
-            placeholder='Email'
-            name='email'
-            type='email'
-            onBlur={handleBlur}
-            onChange={handleChange}
-            className={hasError('email')}
-          />
-        </div>
-
-        <div className='form-group'>
+        {/* <div className='form-group'>
           <Input
             defaultValue={values.date}
             placeholder='Date::YYYY-MM-DD'
@@ -128,7 +116,7 @@ const AppointmentForm = ({
             onBlur={handleBlur}
             className={hasError('date')}
           />
-        </div>
+        </div> */}
 
         <div className='row'>
           <div className='col-sm-12 col-md-6'>
@@ -137,9 +125,8 @@ const AppointmentForm = ({
                 name='from'
                 placeholder='From'
                 defaultValue={values.from}
-                onChange={handleChange}
                 onBlur={handleBlur}
-                className={hasError('from')}
+                className='app-from'
               />
             </div>
           </div>
@@ -158,7 +145,7 @@ const AppointmentForm = ({
           </div>
         </div>
 
-        <div className='form-group'>
+        {/* <div className='form-group'>
           <Input
             type='phone'
             name='number'
@@ -168,9 +155,9 @@ const AppointmentForm = ({
             defaultValue={values.number}
             className={hasError('number')}
           />
-        </div>
+        </div> */}
 
-        <div className='form-group'>
+        {/* <div className='form-group'>
           <Input
             name='injury'
             placeholder='Injury'
@@ -179,14 +166,14 @@ const AppointmentForm = ({
             onBlur={handleBlur}
             className={hasError('injury')}
           />
-        </div>
+        </div> */}
 
         <div className='d-flex justify-content-between buttons-list settings-actions'>
           <Button danger onClick={handleCancel}>
             Cancel
           </Button>
 
-          <Button disabled={!isValid} type='primary' htmlType='submit'>
+          <Button disabled={!isValid} type='primary' className='submit-app' htmlType='submit'>
             {submitText}
           </Button>
         </div>
