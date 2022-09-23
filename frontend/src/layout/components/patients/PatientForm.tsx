@@ -133,7 +133,20 @@ const PatientForm = ({
     totalprice= 
     setValues({...values, totalprice})
   };
-  
+  const printDiv=()=>{
+    var divContents = document.getElementById("GFG").innerHTML;
+            var a = window.open('', '', 'height=10000, width=1000');
+            a.document.write('<html>');
+            a.document.write('<body ><br>');
+            a.document.write(divContents);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+
+  }
+  const current = new Date();
+  const pr_date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
   return (
     <>
       
@@ -785,14 +798,28 @@ const PatientForm = ({
               </div>
               <div className='col-sm-6 col-12'>
                 <div className='form-group'>
-                <Input placeholder='Instruction'
-                  name='instruction'
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  defaultValue={values.instruction} />
+                  <Input placeholder='Instruction'
+                    name='instruction'
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    defaultValue={values.instruction} />
                 </div>
               </div>
             </div>  
+            <div className='col-sm-6 col-12'>
+            <div id="GFG" >
+                <div className='row'>
+                  <div className='col-sm-6 col-12'>
+                    <div><p><b>Patient Name</b> : {values.name}</p></div>
+                    <div><p>Prescription</p></div>
+                    <div><p>{values.drug} {values.am} {values.noon} {values.pm} {values.food} {values.instruction} - {values.totalqty}</p></div>
+                  </div>
+                </div>
+              </div>
+              <div className='form-group'>
+                <Input type="button" className='prs-button' value="Print" onClick={printDiv}/>
+              </div>
+            </div>
             <div className='d-flex justify-content-between buttons-list settings-actions'>
                 <Button danger onClick={handleCancel}>
                   Cancel
