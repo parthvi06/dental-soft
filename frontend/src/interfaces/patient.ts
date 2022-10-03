@@ -56,7 +56,9 @@ export interface IAppointment {
   injury?: string;
   from?: string;
   to?: string;
-  date?: string
+  date?: string;
+  end?:string
+  
 }
 
 export interface IBilling {
@@ -77,3 +79,25 @@ export interface IDepartment {
   desc: string;
   team: string[];
 }
+export interface IEventCalendar {
+  _id: string;
+  id?: string;
+  title: string;
+  treatment: string;
+  backgroundColor: string;
+  textColor: string;
+  end: string;
+  start: string;
+  user: string;
+}
+
+export const mapEventCalendar = (eventCalendar: IEventCalendar) => ({
+  ...eventCalendar,
+  id: eventCalendar?._id,
+});
+
+export const mapArrayEventCalendar = (listEventsCalendar: IEventCalendar[]) => {
+  const listEventsCalendarFormated = listEventsCalendar.map((eventCalendar) => mapEventCalendar(eventCalendar));
+
+  return listEventsCalendarFormated;
+};

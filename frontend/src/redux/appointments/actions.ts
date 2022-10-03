@@ -1,47 +1,57 @@
 import {
-    ADD_APPOINTMENT,
-    DELETE_APPOINTMENT,
-    EDIT_APPOINTMENT,
     SET_APPOINTMENTS,
-    SetAppointmentAction
   } from './types';
   
-  import { IAppointment } from '../../interfaces/patient';
+  // import { IAppointment } from '../../interfaces/patient';
   import * as api from '../../api/index';
   import {toast} from 'react-toastify';
-
-  export const setAppointments = (appointments: IAppointment[]): SetAppointmentAction => ({
-    type: SET_APPOINTMENTS,
-    payload: appointments
-  });
+  interface ICreateEventCalendar {
+    title: string;
+    end: string;
+    start: string;
+    treatment: string
+    backgroundColor: string;
+    textColor: string;
+  }
   
-  export const addAppointment = (appointment: IAppointment) => async (dispatch) => {
+  export const addAppointment = async (ICreateEventCalendar) =>  {
     try {
-      const { data } = await api.createAppointment(appointment);
+      const response = await api.createAppointment(ICreateEventCalendar);
+      console.log(ICreateEventCalendar)
       toast.success("Appointment added!!");
-      dispatch({ type: ADD_APPOINTMENT, payload: data });
+      return response.data;
+      console.log(response.data);
     } catch (error) {
       console.log("Error on add appointment");
     }
   };
-  
-  export const deleteAppointment = (id: string) => async (dispatch) => {
+  // interface IDeleteEventCalendar {
+  //   id: string;
+  // }
+  export const deleteAppointment =  async (id) =>  {
     try {
       await api.deleteAppointment(id);
       toast.success("Appointment deleted");
-      dispatch({ type: DELETE_APPOINTMENT, id });
       console.log(id);
     } catch (error) {
       console.log("Error while deleting appointment");
     }
   };  
-    
-  export const editAppointment = (appointment: IAppointment) => async (dispatch) => {
+  interface IUpdateEventCalendar {
+    _id: string;
+    title: string;
+    end: string;
+    start: string;
+    treatment: string;
+    backgroundColor: string;
+    textColor: string;
+  }
+
+  export const editAppointment = async (id,IUpdateEventCalendar) => {
     try {
-      const { data } = await api.editAppointment(appointment._id,appointment);
+      const response = await api.editAppointment(id,IUpdateEventCalendar);
       toast.success("Appointment edited!!");
-  
-      dispatch({ type: EDIT_APPOINTMENT, payload: data });
+      return response.data;
     } catch (error) {
       console.log("Error on editing appointment");
     }
@@ -50,11 +60,17 @@ import {
   
   export const fetchAppointments  = () => async (dispatch) => {
     try {
-      
       const { data }= await api.fetchAppointment();
       dispatch({ type: SET_APPOINTMENTS, payload: data });
     } catch (error) {
       console.log("Error");
     }
   };
-  
+  export const getAllEventsCalendar = async () => {
+    try {
+      const response = await api.fetchAppointment();
+      return response.data;
+    } catch (err) {
+      return err;
+    }
+  };

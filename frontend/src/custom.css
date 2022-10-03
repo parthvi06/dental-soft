@@ -18,6 +18,9 @@
 .ant-modal-wrap {
     top: -87px;
 }
+.ant-tabs-tab + .ant-tabs-tab {
+    margin: 0 0 0 20px;
+}
 .ant-picker.has-error {
     border-color: #ed5564;
 }
@@ -28,4 +31,21 @@
 input.ant-input.medic-dosage {
     padding-right: 0px!Important;
     border-radius: 0px;
+}
+.appoimtment-modal{
+    width: 400px !important;
+}
+.appoimtment-modal .ant-modal-close-x{
+    line-height: 34px;
+    width: 30px;
+    height: 30px;
+}
+.appoimtment-modal .ant-modal-footer{
+    display: none;
+}
+.appoimtment-modal .appointment-button{
+    text-align: center;
+}
+.appoimtment-modal .ant-btn{
+    margin: 5px;
 }

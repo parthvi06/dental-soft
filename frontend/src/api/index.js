@@ -14,7 +14,6 @@ export const deleteAppointment = (id) => axios.delete(`${a_url}/${id}`);
 export const createAppointment = (newAppointment) => axios.post(a_url, newAppointment);
 export const editAppointment = (id, editAppointment) => axios.patch(`${a_url}/${id}`, editAppointment);
 
-
 const pay_url = 'http://localhost:7000/payments';
 export const fetchPayment = () => axios.get(pay_url);
 export const deletePayment = (id) => axios.delete(`${pay_url}/${id}`);

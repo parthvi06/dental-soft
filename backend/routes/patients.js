@@ -56,6 +56,7 @@ router.route('/').post((req, res) => {
                                     findings,
                                     investigation,
                                     diagnosis,
+                                    tags,
                                     notes
                                    })
 

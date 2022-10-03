@@ -4,16 +4,11 @@ const Schema = moongose.Schema;
 
 const appointmentSchema = new Schema({
   title: {type: String},
-  img: {type: String},
-  email: {type: String},
-  number: {type: String},
+  treatment: {type: String},
   start: {type: String},
-  date:{type: String},
-  fromTo: {type: String},
-  doctor: {type: String},
-  injury: {type: String},
-  from: {type: String},
-  to: {type: String},
+  end: {type: String},
+  backgroundColor: {type: String},
+  textColor: {type: String}
   },
   { timestamps: true,
 });

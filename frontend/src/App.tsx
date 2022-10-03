@@ -9,6 +9,7 @@ import { useHideLoader } from './hooks/useHideLoader';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './custom.css';
+
 const Routes = ({ routes, layout = '' }) => (
   <Switch>
     {routes.map((route, index) => (

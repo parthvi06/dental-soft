@@ -37,6 +37,7 @@ export const deletePatient = (id: string) => async (dispatch) => {
 export const editPatient = (patients:IPatient) => async (dispatch) => {
   try {
     const { data } = await api.editPatient(patients._id,patients);
+    console.log(data)
     toast.success("Patient edited!!");
     dispatch({ type: EDIT_PATIENT, payload: data });
   } catch (error) {

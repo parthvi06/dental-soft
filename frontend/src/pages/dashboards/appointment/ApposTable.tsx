@@ -51,21 +51,9 @@ const ApposTable = ({
       render: (title) => <strong>{title}</strong>
     },
     {
-      key: 'email',
-      dataIndex: 'email',
-      title: 'Email',
-      sorter: (a, b) => (a.email > b.email ? 1 : -1),
-      render: (email) => (
-        <span className='nowrap' style={{ color: '#336cfb' }}>
-          <span className='icofont icofont-ui-email mr-1' style={{ fontSize: 16 }} />
-          {email}
-        </span>
-      )
-    },
-    {
       key: 'start',
       dataIndex: 'start',
-      title: 'Date',
+      title: 'Start',
       render: (start) => (
         <span className='nowrap' style={{ color: '#a5a5a5' }}>
           {start}
@@ -73,32 +61,16 @@ const ApposTable = ({
       )
     },
     {
-      key: 'visit',
-      title: 'Visit time',
-      render: (appointment) => (
+      key: 'end',
+      dataIndex: 'end',
+      title: 'End',
+      render: (end) => (
         <span className='nowrap' style={{ color: '#a5a5a5' }}>
-          {appointment.fromTo}
+          {end}
         </span>
       )
     },
-    {
-      key: 'number',
-      dataIndex: 'number',
-      title: 'Number',
-      render: (phone) => (
-        <span className='d-flex align-baseline nowrap' style={{ color: '#336cfb' }}>
-          <span className='icofont icofont-ui-cell-phone mr-1' style={{ fontSize: 16 }} />
-          {phone}
-        </span>
-      )
-    },
-    { key: 'doctor', title: 'Doctor', dataIndex: 'doctor' },
-    { key: 'condition', title: 'Injury/Condition', dataIndex: 'injury' },
-    {
-      key: 'actions',
-      title: 'Actions',
-      render: actions
-    }
+    
   ];
 
   const pagination = appointments.length <= 10 ? false : {};

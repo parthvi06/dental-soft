@@ -2,20 +2,24 @@ import React,{ useState } from 'react';
 
 import { Calendar, Card, Button, Modal,Input } from 'antd';
 import { useHistory } from 'react-router-dom';
-
+import { CalendarApi } from '@fullcalendar/react';
 import FullCalendar, { formatDate } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import AddAppointment from '../appointment/AddAppointment';
 import { useFetchPageData, usePageData } from '../../../hooks/usePage';
-import { useAppointments } from '../../../hooks/useAppointments';
+// import { useAppointments } from '../../../hooks/useAppointments';
+import { useDisclosure } from '../../../hooks/useDisclosure';
 import { IAppointment } from '../../../interfaces/patient';
+import { IEventCalendar } from '../../../interfaces/patient';
 import { IPageData } from '../../../interfaces/page';
 import { appointmentsReducer } from '../../../redux/appointments/reducer';
 import { fetchAppointment } from '../../../api';
 import { setConstantValue } from 'typescript';
-
+import { ModalInfosEventCalendar } from "./ModalInfosEventCalendar";
+import {toast} from 'react-toastify';
+import { editAppointment } from '../../../redux/appointments/actions';
 const pageData: IPageData = {
   fulFilled: false,
   breadcrumbs: [
@@ -28,72 +32,59 @@ const pageData: IPageData = {
     }
   ]
 };
-type Props = {
-  onSubmit: (appointment: IAppointment) => void;
-  visible: boolean;
-  onClose: () => void;
-};
-const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
+type CalendarSchedulerProps = {
+  eventsCalendar: IAppointment[];
+}
+const DashboardPage = ({eventsCalendar}: CalendarSchedulerProps) => {
   const [appointments] = useFetchPageData<IAppointment[]>('http://localhost:7000/appointments', []);
   usePageData(pageData);
-  const [event, setEvent] = useState(null);
-  const [modalVisibility, setModalVisibility] = useState(false);
-  const { addAppointment, editAppointment, deleteAppointment } = useAppointments();
-
-  const start = formatDate('2018-09-01', {
-    month: 'long',
-    year: 'numeric',
-    day: 'numeric',
-    timeZoneName: 'short',
-    timeZone: 'UTC',
-    locale: 'es',
-  })
-
-
-  const handleEventClick = (arg: any) => {
-    setEvent(arg.event);
-    setModalVisibility(true);
-  };
-  const closeModal = () => setModalVisibility(false);
+  // const { addAppointment, editAppointment, deleteAppointment } = useAppointments();
   const [eventInfos, setEventInfos] = useState();
   const [isEditCard, setIsEditCard] = useState<boolean>(false);
-  const state = {
+
+  const weekends = {
     weekendsVisible: true,
-    currentEvents: []
-  }
-  const [addingModalVisibility, setAddingModalVisibility] = useState(false);
-  const handleDateSelect = (selectInfo) => {
-    setIsEditCard(true);
+    currentEvents: [],
+  };
+
+  const modalInfosEvent = useDisclosure(false);
+
+  const handleAddEventSelectAndOpenModal = (selectInfo: any) => {
+    setIsEditCard(false);
     setEventInfos(selectInfo);
-    setAddingModalVisibility(true);
-    console.log(selectInfo);
-    jQuery(function() { $('.app-from').val(selectInfo.startStr);
-      $("button").on('click',function(){
-        console.log('click')
-        $('.app-from').val(selectInfo.startStr);
-      });
-     })
-    
-  }
-  const closeAddingModal = () => setAddingModalVisibility(false);
-  function renderEventContent(eventInfo) {
-    return (
-      <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-      </>
-    )
-  }
-  // const handleEventClick = (clickInfo) => {
-  //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-  //     clickInfo.event.remove()
-  //   }
-  // }
-  // const handleEvents = (events) => {
-  //   setState({
-  //     currentEvents: events
-  //   })
-  // }
+    modalInfosEvent.handleOpen();
+  };
+
+  const handleEditEventSelectAndOpenModal = (clickInfo: any) => {
+    setIsEditCard(true);
+    setEventInfos(clickInfo);
+    modalInfosEvent.handleOpen();
+  };
+
+  const handleUpdateEventSelect = async (changeInfo: any) => {
+    try {
+      const calendarApi: CalendarApi = changeInfo.view.calendar;
+      const eventCalendarUpdated = {
+        _id: changeInfo.event.id,
+        title: changeInfo.event.title,
+        treatment: changeInfo.event.treatment,
+        start: changeInfo.event.startStr,
+        end: changeInfo.event.endStr,
+        backgroundColor: changeInfo.event.backgroundColor,
+        textColor: changeInfo.event.textColor,
+      };
+      const currentEvent = calendarApi.getEventById(changeInfo.event._def.extendedProps._id);
+      if (currentEvent) {
+        currentEvent.setProp('title', changeInfo.event.title);
+        currentEvent.setProp('treatment', changeInfo.event.treatment);
+        currentEvent.setProp('backgroundColor', changeInfo.event.backgroundColor);
+        currentEvent.setProp('textColor', changeInfo.event.textColor);
+      }
+      await editAppointment(changeInfo.event.id,eventCalendarUpdated);
+    } catch (err) {
+      toast.error('There was an error updating the event');
+    }
+  };
 
   return (
     <>
@@ -178,33 +169,40 @@ const DashboardPage = ({ visible, onClose, onSubmit }: Props) => {
           </Card>
         </div> */}
       </div>
-      
       <Card className='mb-0'>
-        <FullCalendar
-          events={appointments} 
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-          }}
-          initialView='dayGridMonth'
-          navLinks= {true}
-          editable={true}
-          selectable={true}
-          selectMirror={true}
-          dayMaxEvents={true}
-          weekends={state.weekendsVisible}
-          select={handleDateSelect}
-          eventContent={renderEventContent} // custom render function
-          eventClick={handleEventClick} 
+        <div>
+          <h4>Add Appointment</h4>
+        </div>
+        <ModalInfosEventCalendar
+          open={modalInfosEvent.isOpen}
+          handleClose={modalInfosEvent.handleClose}
+          eventInfos={eventInfos}
+          isEditCard={isEditCard}
         />
-          <AddAppointment
-          onClose={closeAddingModal}
-          visible={addingModalVisibility}
-          onSubmit={addAppointment}
-      />
-      </Card>
+        <FullCalendar
+          plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
+          initialView="timeGridWeek"
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          weekends={weekends.weekendsVisible}
+          select={handleAddEventSelectAndOpenModal}
+          eventClick={handleEditEventSelectAndOpenModal}
+          eventChange={handleUpdateEventSelect}
+          events={appointments} 
+          longPressDelay={1000}
+          eventLongPressDelay={1000}
+          selectLongPressDelay={1000}
+          selectable={true}
+          dayMaxEvents={true}
+          allDaySlot={false}
+          editable={true}
+          height="700px"
+        />
+
+    </Card>
       
     </>
   );

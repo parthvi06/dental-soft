@@ -144,8 +144,6 @@ const PatientForm = ({
             a.print();
 
   }
-  const current = new Date();
-  const pr_date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
   return (
     <>
@@ -153,9 +151,9 @@ const PatientForm = ({
       <Tabs defaultActiveKey="1" onChange={onChange}>
         <TabPane tab="General Info" key="1">
           <form onSubmit={handleSubmit}>
-            <div className='form-group'>
+            {/* <div className='form-group'>
               <ImageLoader onLoad={handleImageLoad} src={values.img as string} />
-            </div>
+            </div> */}
 
             <div className='form-group'>
               <Input
@@ -819,6 +817,22 @@ const PatientForm = ({
               <div className='form-group'>
                 <Input type="button" className='prs-button' value="Print" onClick={printDiv}/>
               </div>
+            </div>
+            <div className='d-flex justify-content-between buttons-list settings-actions'>
+                <Button danger onClick={handleCancel}>
+                  Cancel
+                </Button>
+
+                <Button type='primary' htmlType='submit'>
+                  {submitText}
+                </Button>
+            </div>
+          </form>
+        </TabPane>
+        <TabPane tab="Images" key="5">
+          <form onSubmit={handleSubmit}>
+            <div className='form-group'>
+              <ImageLoader onLoad={handleImageLoad} src={values.img as string}  />
             </div>
             <div className='d-flex justify-content-between buttons-list settings-actions'>
                 <Button danger onClick={handleCancel}>

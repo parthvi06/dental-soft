@@ -22,10 +22,10 @@ const AddAppo = () => {
 
   return (
     <div className='add-patient'>
-      <Button type='primary' onClick={handleClick}>
+      {/* <Button type='primary' onClick={handleClick}>
         <span className='icofont icofont-plus mr-2' style={{ fontSize: '1.3em' }} />
         Add appointment
-      </Button>
+      </Button> */}
       <Modal
         visible={visible}
         footer={null}

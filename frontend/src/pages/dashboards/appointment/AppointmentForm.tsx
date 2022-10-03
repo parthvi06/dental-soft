@@ -67,11 +67,8 @@ const AppointmentForm = ({
       onCancel();
     }
   });
-  const [date, from] = values.start.split('T');
-  const [img, setImg] = useState(values.img);
-
   useEffect(() => {
-    setValues({ ...values, date, from });
+    setValues({ ...values });
   }, [appointment]);
 
 
@@ -95,78 +92,6 @@ const AppointmentForm = ({
             className='title'
           />
         </div>
-
-        <div className='form-group'>
-          <Input
-            defaultValue={values.doctor}
-            placeholder='Doctor'
-            onBlur={handleBlur}
-            name='doctor'
-            onChange={handleChange}
-            className={hasError('doctor')}
-          />
-        </div>
-
-        {/* <div className='form-group'>
-          <Input
-            defaultValue={values.date}
-            placeholder='Date::YYYY-MM-DD'
-            name='date'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={hasError('date')}
-          />
-        </div> */}
-
-        <div className='row'>
-          <div className='col-sm-12 col-md-6'>
-            <div className='form-group'>
-              <Input
-                name='from'
-                placeholder='From'
-                defaultValue={values.from}
-                onBlur={handleBlur}
-                className='app-from'
-              />
-            </div>
-          </div>
-
-          <div className='col-sm-12 col-md-6'>
-            <div className='form-group'>
-              <Input
-                name='to'
-                placeholder='To'
-                defaultValue={values.to}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={hasError('to')}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* <div className='form-group'>
-          <Input
-            type='phone'
-            name='number'
-            onBlur={handleBlur}
-            placeholder='Number'
-            onChange={handleChange}
-            defaultValue={values.number}
-            className={hasError('number')}
-          />
-        </div> */}
-
-        {/* <div className='form-group'>
-          <Input
-            name='injury'
-            placeholder='Injury'
-            onChange={handleChange}
-            defaultValue={values.injury}
-            onBlur={handleBlur}
-            className={hasError('injury')}
-          />
-        </div> */}
 
         <div className='d-flex justify-content-between buttons-list settings-actions'>
           <Button danger onClick={handleCancel}>

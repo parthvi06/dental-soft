@@ -8,9 +8,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/').post((req, res) => {
-    const {img, title, number, email, start, fromTo, injury, doctor,from, to,date } = req.body;
+    const { title,treatment, start, end, backgroundColor, textColor } = req.body;
   
-    const newAppointment = new Appointment({img, title, number, email, start, fromTo, injury, doctor,from, to, date })
+    const newAppointment = new Appointment({title,treatment,start,end,backgroundColor, textColor })
   
     newAppointment.save()
       .then(() => res.json(newAppointment))
@@ -27,16 +27,11 @@ router.route('/').post((req, res) => {
     Appointment.findById(req.params.id)
       .then(appointments => {
         appointments.title = req.body.title;
-        appointments.img = req.body.img;
-        appointments.number = req.body.number;
-        appointments.email = req.body.email;
+        appointments.treatment = req.body.treatment;
         appointments.start = req.body.start;
-        appointments.fromTo = req.body.fromTo;
-        appointments.injury = req.body.injury;
-        appointments.doctor = req.body.doctor;
-        appointments.from = req.body.from;
-        appointments.to = req.body.to;
-        appointments.date = req.body.date;
+        appointments.end = req.body.end;
+        appointments.backgroundColor = req.body.backgroundColor;
+        appointments.textColor = req.body.textColor;
 
         appointments.save()
           .then(() => res.json(appointments))

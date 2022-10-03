@@ -9,15 +9,15 @@ export function useAppointments() {
   const dispatch = useDispatch();
   const appointments = useSelector<IAppState, IAppointment[]>((state) => state.appointments);
   const editAppointment = (appointment: IAppointment) => {
-    return dispatch(actions.editAppointment(appointment));
+    // return dispatch(actions.editAppointment(appointment));
   };
   
   const addAppointment = (appointment: IAppointment) => {
-    return dispatch(actions.addAppointment(appointment));
+    // return dispatch(actions.addAppointment(appointment));
   };
 
   const deleteAppointment = (id: string) => {
-    return dispatch(actions.deleteAppointment(id));
+    // return dispatch(actions.deleteAppointment(id));
   };
 
   return { appointments, addAppointment, editAppointment, deleteAppointment };
