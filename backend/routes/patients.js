@@ -31,7 +31,18 @@ router.route('/').post((req, res) => {
           findings,
           investigation,
           diagnosis,
-          notes
+          notes,
+          price,
+          discount,
+          totalprice,
+          treatment,
+          drug,
+          am,
+          noon,
+          pm,
+          totalqty,
+          food,
+          instruction
         } = req.body;
 
   const newPatient = new Patient({ img, 
@@ -57,7 +68,18 @@ router.route('/').post((req, res) => {
                                     investigation,
                                     diagnosis,
                                     tags,
-                                    notes
+                                    notes,
+                                    price,
+                                    discount,
+                                    totalprice,
+                                    treatment,
+                                    drug,
+                                    am,
+                                    noon,
+                                    pm,
+                                    totalqty,
+                                    food,
+                                    instruction
                                    })
 
   newPatient.save()

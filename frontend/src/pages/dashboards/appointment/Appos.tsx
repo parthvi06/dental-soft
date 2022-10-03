@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 
 import { usePageData } from '../../../hooks/usePage';
 import { useAppointments } from '../../../hooks/useAppointments';
-import PageAction from '../../../layout/components/page-action/PageAction';
+// import PageAction from '../../../layout/components/page-action/PageAction';
 import ApposTable from './ApposTable';
 import AddAppointment from './AddAppointment';
 
