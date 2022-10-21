@@ -46,7 +46,7 @@ const ImageLoader = ({ src, size = 40, onLoad = () => null }: Props) => {
     <>
       <input ref={input} onChange={handleLoad} type='file' accept="application/pdf,image/jpeg" multiple />
       <div className='d-flex align-items-center'>
-        <Avatar src={src || img} size={size} className='mr-4' />
+        {/* <Avatar src={src || img} size={size} className='mr-4' /> */}
         
         {/* <Button type={'primary'} className='btn-outline' onClick={handleClick}>
           Select files 

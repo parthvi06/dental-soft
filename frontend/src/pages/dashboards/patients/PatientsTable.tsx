@@ -6,7 +6,6 @@ import { Avatar, Table, Button, Modal, Tag, Input } from 'antd';
 import { IPatient } from '../../../interfaces/patient';
 import PatientForm from '../../../layout/components/patients/PatientForm';
 import { SearchOutlined } from "@ant-design/icons";
-import { getPatient } from '../../../redux/patients/actions';
 import { useDispatch } from 'react-redux';
 
 type Props = {

@@ -12,6 +12,7 @@ import {
     treatment: string
     backgroundColor: string;
     textColor: string;
+    email: string
   }
   
   export const addAppointment = async (ICreateEventCalendar) =>  {
@@ -32,7 +33,6 @@ import {
     try {
       await api.deleteAppointment(id);
       toast.success("Appointment deleted");
-      console.log(id);
     } catch (error) {
       console.log("Error while deleting appointment");
     }
@@ -45,6 +45,7 @@ import {
     treatment: string;
     backgroundColor: string;
     textColor: string;
+    email: string
   }
 
   export const editAppointment = async (id,IUpdateEventCalendar) => {

@@ -88,7 +88,7 @@ const VerticalLayout = ({ children }: Props) => {
       />
 
       <AddPatient />
-
+    
       <Menu className='assistant-menu' orientation='vertical'>
         <NavLink className='link' to='/vertical/settings' activeClassName='active' replace>
           <span className='link-icon icofont icofont-ui-settings' />
@@ -114,6 +114,7 @@ const VerticalLayout = ({ children }: Props) => {
       <BaseLayout orientation='vertical' nav={nav} sideNav={sideNav}>
         {children}
       </BaseLayout>
+      
     </>
   );
 };

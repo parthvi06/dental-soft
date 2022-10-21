@@ -72,6 +72,7 @@ const DashboardPage = ({eventsCalendar}: CalendarSchedulerProps) => {
         end: changeInfo.event.endStr,
         backgroundColor: changeInfo.event.backgroundColor,
         textColor: changeInfo.event.textColor,
+        email: changeInfo.event._def.extendedProps.email
       };
       const currentEvent = calendarApi.getEventById(changeInfo.event._def.extendedProps._id);
       if (currentEvent) {
@@ -79,13 +80,14 @@ const DashboardPage = ({eventsCalendar}: CalendarSchedulerProps) => {
         currentEvent.setProp('treatment', changeInfo.event.treatment);
         currentEvent.setProp('backgroundColor', changeInfo.event.backgroundColor);
         currentEvent.setProp('textColor', changeInfo.event.textColor);
+        currentEvent.setProp('email',changeInfo.event._def.extendedProps.email);
       }
       await editAppointment(changeInfo.event.id,eventCalendarUpdated);
     } catch (err) {
       toast.error('There was an error updating the event');
     }
   };
-
+  
   return (
     <>
       <div className='row'>
@@ -201,9 +203,7 @@ const DashboardPage = ({eventsCalendar}: CalendarSchedulerProps) => {
           editable={true}
           height="700px"
         />
-
-    </Card>
-      
+      </Card>
     </>
   );
 };

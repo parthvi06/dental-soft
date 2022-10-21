@@ -18,6 +18,13 @@
     "routing": "patients"
   },
   {
+    "title": "Schedule",
+    "icon": {
+      "class": "icofont-sign-in"
+    },
+    "routing": "seatallotment"
+  },
+  {
     "title": "Appointments",
     "icon": {
       "class": "icofont-patient-file"
@@ -32,7 +39,7 @@
     "routing": "doctors"
   },
   {
-    "title": "Departments",
+    "title": "Dental Speciality",
     "icon": {
       "class": "icofont-nurse"
     },
@@ -41,7 +48,7 @@
   {
     "title": "Payments",
     "icon": {
-      "class": "icofont-pay"
+      "class": "icofont-bill-alt"
     },
     "routing": "payments"
   }

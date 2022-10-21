@@ -41,7 +41,12 @@ export interface IPatient {
   pm?:string,
   totalqty?:string,
   food?:string,
-  instruction?:string
+  instruction?:string;
+  treatmentCheckbox?:any
+  treatmentPrice?:number,
+  treatmentDiscount?: number,
+  treatmentTotal?: number,
+ 
 }
 export interface IAppointment {
   // id?: string;

@@ -57,7 +57,6 @@ export const getPatient = (patients:IPatient) => async (dispatch) => {
   try {
     const { data } = await api.fetchPatientDetail(patients);
     dispatch({ type: FETCH_PATIENT, payload: data });
-    console.log(patients,'hi',data);
   } catch (error) {
     console.log("Error ");
   }

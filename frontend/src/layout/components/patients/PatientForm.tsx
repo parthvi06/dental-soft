@@ -1,15 +1,12 @@
 import React from 'react';
-
-import { Button, Select, Input, DatePicker, Tabs, Tag } from 'antd';
+import { Button, Select, Input, DatePicker, Tabs, Tag, Checkbox, Col, Row } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-
 import ImageLoader from './ImageLoader';
 import { hasErrorFactory } from '../../../utils/hasError';
-
 import { IPatient } from '../../../interfaces/patient';
-import { Label } from 'recharts';
+import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 
 const { Option } = Select;
 const children = [];
@@ -99,7 +96,7 @@ const PatientForm = ({
   const handleSensitivitySelect = (value) => setFieldValue('sensitivity', value);
   const handleConclusionSelect = (value) => setFieldValue('conclusion', value);
   const handleTreatmentSelect = (value) => setFieldValue('treatment', value);
-  const handleDrugSelect = (value) => setFieldValue('drug', value);
+  // const handleDrugSelect = (value) => setFieldValue('drug', value);
   const handleFoodSelect = (value) => setFieldValue('food', value);
   const hasError = hasErrorFactory(touched, errors);
 
@@ -129,20 +126,30 @@ const PatientForm = ({
   const handleChangeNotes = (notes) => {
     setValues({...values, notes})
   };
+  const handleDrugSelect = (drug) => {
+    setValues({...values, drug})
+  };
   const handleChangeTotalPrice = (totalprice) => {
     totalprice= 
     setValues({...values, totalprice})
   };
+  const handleChangeTreamtmentTotal = (treatmentTotal) => {
+    treatmentTotal= 
+    setValues({...values, treatmentTotal})
+  };
+  const onChangeCheckbox = (treatmentCheckbox: CheckboxValueType[]) => {
+    setValues({...values,treatmentCheckbox})
+    console.log('checked = ', treatmentCheckbox);
+  };
   const printDiv=()=>{
     var divContents = document.getElementById("GFG").innerHTML;
-            var a = window.open('', '', 'height=10000, width=1000');
-            a.document.write('<html>');
-            a.document.write('<body ><br>');
-            a.document.write(divContents);
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print();
-
+    var a = window.open('', '', 'height=10000, width=1000');
+    a.document.write('<html>');
+    a.document.write('<body ><br>');
+    a.document.write(divContents);
+    a.document.write('</body></html>');
+    a.document.close();
+    a.print();
   }
 
   return (
@@ -255,7 +262,6 @@ const PatientForm = ({
                 </div>
               </div>
             </div>
-
             <div className='row'>
               <div className='col-sm-6 col-12'>
                 <div className='form-group'>
@@ -284,7 +290,6 @@ const PatientForm = ({
                 </div>
               </div>
             </div>
-
             <div className='form-group'>
             <Input
                 placeholder='Email'
@@ -488,7 +493,174 @@ const PatientForm = ({
             </div>
           </form>
         </TabPane>
-        <TabPane tab="Treatment Done" key="3">
+        <TabPane tab="Treatment Plan" key="3">
+          <form onSubmit={handleSubmit}>
+            <div className='form-group'>
+              <Checkbox.Group style={{ width: '100%' }} 
+                onChange={onChangeCheckbox} 
+                className='treatment-checkbox'
+                name=''
+                defaultValue={values.treatmentCheckbox} >
+                <label>Upper Right</label>
+                <Row>
+                  <Col span={2}>
+                    <Checkbox value="1">1</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="2">2</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="3">3</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="4">4</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="5">5</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="6">6</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="7">7</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="8">8</Checkbox>
+                  </Col>
+                </Row>
+                <label>Upper Left</label>
+                <Row>
+                  <Col span={2}>
+                    <Checkbox value="9">9</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="10">10</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="11">11</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="12">12</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="13">13</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="14">14</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="15">15</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="16">16</Checkbox>
+                  </Col>
+                </Row>
+                <label>Lower Left</label>
+                <Row>
+                  <Col span={2}>
+                    <Checkbox value="17">17</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="18">18</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="19">19</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="20">20</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="21">21</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="22">22</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="23">23</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="24">24</Checkbox>
+                  </Col>
+                </Row>
+                <label>Lower Right</label>
+                <Row>
+                  <Col span={2}>
+                    <Checkbox value="25">25</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="26">26</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="27">27</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="28">28</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="29">29</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="30">30</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="31">31</Checkbox>
+                  </Col>
+                  <Col span={2}>
+                    <Checkbox value="32">32</Checkbox>
+                  </Col>
+                </Row>
+              </Checkbox.Group>
+            </div>
+            <div className='row'>
+              <div className='col-sm-6 col-12'>  
+                <div className='form-group'>
+                  <Input
+                    placeholder='Price'
+                    name='treatmentPrice'
+                    type='text'
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    defaultValue={values.treatmentPrice}
+                  />
+                </div>
+              </div>
+              <div className='col-sm-6 col-12'>  
+                <div className='form-group'>
+                  <Input
+                    placeholder='Discount'
+                    name='treatmentDiscount'
+                    type='text'
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    defaultValue={values.treatmentDiscount}
+                  />
+                </div>
+              </div>
+              <div className='col-sm-6 col-12'>  
+                <div className='form-group'>
+                  <Input
+                    placeholder='Total Price'
+                    name='treatmentTotal'
+                    type='text'
+                    onBlur={handleBlur}
+                    onChange={handleChangeTreamtmentTotal}
+                    value={values.treatmentPrice-(values.treatmentPrice*values.treatmentDiscount/100) ||values.treatmentPrice || '0'}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='d-flex justify-content-between buttons-list settings-actions'>
+              <Button danger onClick={handleCancel}>
+                Cancel
+              </Button>
+
+              <Button type='primary' htmlType='submit'>
+                {submitText}
+              </Button>
+            </div>    
+          </form> 
+        </TabPane>
+        <TabPane tab="Treatment Done" key="4">
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
             <Select
@@ -675,7 +847,7 @@ const PatientForm = ({
                 type='text'
                 onBlur={handleBlur}
                 onChange={handleChangeTotalPrice}
-                value={values.price-(values.price*values.discount/100) || '0'}
+                value={values.price-(values.price*values.discount/100) || values.price || '0'}
                />
           </div>
           
@@ -690,12 +862,13 @@ const PatientForm = ({
           </div>
         </form>
         </TabPane>
-        <TabPane tab="Prescription" key="4">
+        <TabPane tab="Prescription" key="5">
           <form onSubmit={handleSubmit}>
             <div className='row'>
               <div className='col-sm-12 col-12'>
                 <div className='form-group'>
                   <Select
+                    mode="tags"
                     placeholder='Select drug'
                     defaultValue={values.drug}
                     onChange={handleDrugSelect}
@@ -805,12 +978,36 @@ const PatientForm = ({
               </div>
             </div>  
             <div className='col-sm-6 col-12'>
-            <div id="GFG" >
+              <div id="GFG" >
                 <div className='row'>
                   <div className='col-sm-6 col-12'>
                     <div><p><b>Patient Name</b> : {values.name}</p></div>
                     <div><p>Prescription</p></div>
-                    <div><p>{values.drug} {values.am} {values.noon} {values.pm} {values.food} {values.instruction} - {values.totalqty}</p></div>
+                    <table style={{border: '1px solid black'}}>
+                     <tr>
+                        <th style={{border: '1px solid black'}}rowSpan={2} colSpan={1}>Drug</th>
+                        <th style={{border: '1px solid black'}}rowSpan={1} colSpan={3}>Dosage</th>
+                        <th style={{border: '1px solid black'}}rowSpan={2} colSpan={1}>Qty</th>
+                        <th style={{border: '1px solid black'}}rowSpan={2} colSpan={1}>food</th>
+                        <th style={{border: '1px solid black'}}rowSpan={2} colSpan={1}>Instruction</th>
+                      </tr>
+                     <tr>
+                        <th style={{border: '1px solid black'}}rowSpan={1} colSpan={1}>am</th>
+                        <th style={{border: '1px solid black'}}rowSpan={1} colSpan={1}>noon</th>
+                        <th style={{border: '1px solid black'}}rowSpan={1} colSpan={1}>pm</th>
+                      </tr>
+                      <tbody>
+                       <tr>
+                          <td style={{border: '1px solid black'}}>{values.drug}</td>
+                          <td style={{border: '1px solid black'}}>{values.am}</td>
+                          <td style={{border: '1px solid black'}}>{values.noon}</td>
+                          <td style={{border: '1px solid black'}}>{values.pm}</td>
+                          <td style={{border: '1px solid black'}}>{values.totalqty}</td>
+                          <td style={{border: '1px solid black'}}>{values.food}</td>
+                          <td style={{border: '1px solid black'}}>{values.instruction}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -829,7 +1026,7 @@ const PatientForm = ({
             </div>
           </form>
         </TabPane>
-        <TabPane tab="Images" key="5">
+        <TabPane tab="Images" key="6">
           <form onSubmit={handleSubmit}>
             <div className='form-group'>
               <ImageLoader onLoad={handleImageLoad} src={values.img as string}  />

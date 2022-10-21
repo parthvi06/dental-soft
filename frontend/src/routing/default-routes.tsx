@@ -48,11 +48,16 @@ import IconsOptionsPage from '../pages/icons/IconsOptionsPage';
 import IcofontIconsPage from '../pages/icons/IcofontIconsPage';
 import PaysPage from '../pages/dashboards/payment/Pays';
 import PatientDetails from '../pages/dashboards/patients/PatientDetails';
+import SeatReservation from '../pages/dashboards/dashboard/SeatReservation';
 
 export const defaultRoutes: IRoute[] = [
   {
     path: 'patient/:id',
     component: PatientDetails
+  },
+  {
+    path: 'seatallotment',
+    component: SeatReservation
   },
   {
     path: 'settings',
