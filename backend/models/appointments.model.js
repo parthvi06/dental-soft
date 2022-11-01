@@ -8,7 +8,8 @@ const appointmentSchema = new Schema({
   start: {type: String},
   end: {type: String},
   backgroundColor: {type: String},
-  textColor: {type: String}
+  textColor: {type: String},
+  email:{ type: String}
   },
   { timestamps: true,
 });

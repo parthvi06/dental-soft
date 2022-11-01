@@ -48,9 +48,9 @@ const SignIn = () => {
         console.error("onFailure: ", err);
         setErrorMessage("Incorrect username or password");
       },
-      newPasswordRequired: (data) => {
-        console.log("newPasswordRequired: ", data);
-      },
+      // newPasswordRequired: (data) => {
+      //   console.log("newPasswordRequired: ", data);
+      // },
     });
   };
   return (

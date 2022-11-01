@@ -8,9 +8,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/').post((req, res) => {
-    const { title,treatment, start, end, backgroundColor, textColor } = req.body;
+    const { title,treatment, start, end, backgroundColor, textColor, email } = req.body;
   
-    const newAppointment = new Appointment({title,treatment,start,end,backgroundColor, textColor })
+    const newAppointment = new Appointment({title,treatment,start,end,backgroundColor, textColor, email })
   
     newAppointment.save()
       .then(() => res.json(newAppointment))
@@ -32,6 +32,7 @@ router.route('/').post((req, res) => {
         appointments.end = req.body.end;
         appointments.backgroundColor = req.body.backgroundColor;
         appointments.textColor = req.body.textColor;
+        appointments.email = req.body.email;
 
         appointments.save()
           .then(() => res.json(appointments))

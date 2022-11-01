@@ -39,6 +39,10 @@ const patientSchema = new mongoose.Schema({
   totalqty: {type: String},
   food: {type: String},
   instruction: {type: String},
+  treatmentCheckbox: [String],
+  treatmentPrice: {type: Number},
+  treatmentDiscount: {type: Number},
+  treatmentTotal: {type: Number},
 }, {
 });
 

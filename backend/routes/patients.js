@@ -42,7 +42,11 @@ router.route('/').post((req, res) => {
           pm,
           totalqty,
           food,
-          instruction
+          instruction,
+          treatmentCheckbox,
+          treatmentPrice,
+          treatmentDiscount,
+          treatmentTotal
         } = req.body;
 
   const newPatient = new Patient({ img, 
@@ -79,7 +83,11 @@ router.route('/').post((req, res) => {
                                     pm,
                                     totalqty,
                                     food,
-                                    instruction
+                                    instruction,
+                                    treatmentCheckbox,
+                                    treatmentPrice,
+                                    treatmentDiscount,
+                                    treatmentTotal
                                    })
 
   newPatient.save()
@@ -134,6 +142,11 @@ router.route('/:id').patch((req, res) => {
       patients.totalqty = req.body.totalqty;
       patients.food = req.body.food;
       patients.instruction = req.body.instruction;
+      patients.treatmentCheckbox = req.body.treatmentCheckbox;
+      patients.treatmentPrice = req.body.treatmentPrice;
+      patients.treatmentDiscount = req.body.treatmentDiscount;
+      patients.treatmentTotal = req.body.treatmentTotal;
+
       patients.save()
         .then(() => res.json(patients))
         .catch(err => res.status(400).json('Error: ' + err));

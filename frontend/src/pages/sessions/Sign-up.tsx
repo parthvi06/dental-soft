@@ -10,8 +10,8 @@ import UserPool from '../../UserPool';
 const { Item } = Form;
 
 const SignUp = () => {
-  // const navigateHome = useNavigateHome();
-  // const [form] = useForm();
+  const navigateHome = useNavigateHome();
+  const [form] = useForm();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
