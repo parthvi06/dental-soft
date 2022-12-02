@@ -46,7 +46,8 @@ router.route('/').post((req, res) => {
           treatmentCheckbox,
           treatmentPrice,
           treatmentDiscount,
-          treatmentTotal
+          treatmentTotal,
+          test
         } = req.body;
 
   const newPatient = new Patient({ img, 
@@ -87,7 +88,8 @@ router.route('/').post((req, res) => {
                                     treatmentCheckbox,
                                     treatmentPrice,
                                     treatmentDiscount,
-                                    treatmentTotal
+                                    treatmentTotal,
+                                    test
                                    })
 
   newPatient.save()
@@ -146,6 +148,7 @@ router.route('/:id').patch((req, res) => {
       patients.treatmentPrice = req.body.treatmentPrice;
       patients.treatmentDiscount = req.body.treatmentDiscount;
       patients.treatmentTotal = req.body.treatmentTotal;
+      patients.test = req.body.test;
 
       patients.save()
         .then(() => res.json(patients))

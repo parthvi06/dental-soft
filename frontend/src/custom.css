@@ -45,6 +45,7 @@ label.ant-checkbox-wrapper.ant-checkbox-wrapper-checked {
   justify-content: center;
   border: 1px solid #D3D3D3;
 }
+.rc-tabs-1-panel-Clinical_Note .ant-form-horizontal .box{ display: flex!important;}
 #GFG{ display: none;}
 
 .medic-dosage-row .col-sm-4 {

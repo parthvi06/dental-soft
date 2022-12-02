@@ -161,7 +161,6 @@ const PatientForm = ({
             {/* <div className='form-group'>
               <ImageLoader onLoad={handleImageLoad} src={values.img as string} />
             </div> */}
-
             <div className='form-group'>
               <Input
                 placeholder='Name'

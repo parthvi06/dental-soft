@@ -43,6 +43,7 @@ const patientSchema = new mongoose.Schema({
   treatmentPrice: {type: Number},
   treatmentDiscount: {type: Number},
   treatmentTotal: {type: Number},
+  test:[String]
 }, {
 });
 

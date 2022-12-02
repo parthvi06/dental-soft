@@ -61,3 +61,4 @@ export const getPatient = (patients:IPatient) => async (dispatch) => {
     console.log("Error ");
   }
 };
+

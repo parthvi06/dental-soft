@@ -9,7 +9,6 @@ import {
 } from '../../../redux/appointments/actions';
 import { BackgroundColorRounded, SelectColors, ColorsCard, ListColorsCard } from './styles';
 import emailjs from 'emailjs-com';
-import { start } from 'repl';
 interface ICardColor {
   backgroundColor: string;
   textColor: string;
@@ -82,7 +81,6 @@ export const ModalInfosEventCalendar = ({
         textColor: cardColor.textColor,
         email: eventCalendar.email
       });
-      console.log(eventCalendar.start.substring(11, 19),eventCalendar.start.slice(0, -15))
       const sendEmail = () =>{
         var templateParams = {
           email: email,

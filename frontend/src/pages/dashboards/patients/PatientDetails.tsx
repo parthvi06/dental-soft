@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import { useFetchPageData } from '../../../hooks/usePage';
 import { IPatient } from '../../../interfaces/patient';
 import { Avatar, Table, Button, Tabs, Input } from 'antd';
-import { Card, Form, Select, Timeline } from 'antd'
+import { Card, Select, Timeline } from 'antd'
 import { useFormik } from 'formik';
 import ImageLoader from '../../../layout/components/patients/ImageLoader';
+import { addPatient, editPatient } from '../../../redux/patients/actions';
+import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 
 const PatientDetails = () => {
   const dispatch = useDispatch();
@@ -16,87 +18,98 @@ const PatientDetails = () => {
     dispatch(getPatient(id['id']));
   }, [id]);
   const [patient] = useFetchPageData<IPatient[]>(`http://localhost:7000/patients/${id['id']}`, []);
-  const FormItem = Form.Item;
-  const Option = Select.Option;
 
-  const ProfileForm = ({ patient }) => {
-    const { values } = useFormik({
-      initialValues: { ...patient },
-      onSubmit: () => null
-    });
+
   
-    const [inputList, setInputList] = useState([{ firstName: "", lastName: "" }]);
- 
-    // handle input change
-    const handleInputChange = (e, index) => {
-      const { name, value } = e.target;
-      const list = [...inputList];
-      list[index][name] = value;
-      setInputList(list);
-    };
-   
-    // handle click event of the Remove button
-    const handleRemoveClick = index => {
-      const list = [...inputList];
-      list.splice(index, 1);
-      setInputList(list);
-    };
-   
-    // handle click event of the Add button
-    const handleAddClick = () => {
-      setInputList([...inputList, { firstName: "", lastName: "" }]);
-      console.log(inputList)
-    };
-  return (
-    <div className='patient-info'>
-      <h5>{patient.name}</h5>
-      <Tabs>
-        <Tabs.TabPane tab="Clinical Note" key="Clinical_Note">
-          <Form>
-          {inputList.map((x, i) => {
-        return (
-          <div className="box" style={{display:'inline-flex'}}>
-            <input
-              name="firstName"
-   placeholder="Enter First Name"
-              value={x.firstName} 
-              onChange={e => handleInputChange(e, i)}
-            />
-            <input
-              className="ml10"
-              name="lastName"
-   placeholder="Enter Last Name"
-              value={x.lastName}
-              onChange={e => handleInputChange(e, i)}
-            />
-            <div className="btn-box">
-              {inputList.length !== 1 && <button
-                className="mr10"
-                onClick={() => handleRemoveClick(i)}>Remove</button>}
-              {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
-            </div>
-          </div>
-        );
-      })}
-          <div><p>{JSON.stringify(inputList)}</p></div>
-          </Form>
-        </Tabs.TabPane>
-      </Tabs>
-    </div>
-  );
+  const initialValues = {
+    friends: [
+      {
+        name: '',
+        email: '',
+      },
+    ],
   };
-
   return (
       patient && (
         <>
+          {/* <div>
+            <h1>Invite friends</h1>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={async (values) => {
+                await new Promise((r) => setTimeout(r, 500));
+                alert(JSON.stringify(values, null, 2));
+                alert(values)
+              }}
+            >
+              {({ values }) => (
+                <Form>
+                  <FieldArray name="friends">
+                    {({ insert, remove, push }) => (
+                      <div>
+                        {values.friends.length > 0 &&
+                          values.friends.map((friend, index) => (
+                            <div className="row" key={index}>
+                              <div className="col">
+                                <label htmlFor={`friends.${index}.name`}>Name</label>
+                                <Field
+                                  name={`friends.${index}.name`}
+                                  placeholder="Jane Doe"
+                                  type="text"
+                                />
+                                <ErrorMessage
+                                  name={`friends.${index}.name`}
+                                  component="div"
+                                  className="field-error"
+                                />
+                              </div>
+                              <div className="col">
+                                <label htmlFor={`friends.${index}.email`}>Email</label>
+                                <Field
+                                  name={`friends.${index}.email`}
+                                  placeholder="jane@acme.com"
+                                  type="email"
+                                />
+                                <ErrorMessage
+                                  name={`friends.${index}.name`}
+                                  component="div"
+                                  className="field-error"
+                                />
+                              </div>
+                              <div className="col">
+                                <button
+                                  type="button"
+                                  className="secondary"
+                                  onClick={() => remove(index)}
+                                >
+                                  X
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        <button
+                          type="button"
+                          className="secondary"
+                          onClick={() => push({ name: '', email: '' })}
+                        >
+                          Add Friend
+                        </button>
+                      </div>
+                    )}
+                  </FieldArray>
+                  <button type="submit">Invite</button>
+                </Form>
+              )}
+            </Formik>
+          </div> */}
           <div className='row mb-4'>
             <div className='col-md-6 col-sm-12'>
               <div className='header mb-3'> 
               </div>
-              <div className='info stack'>
+              {/* <div className='info stack'>
                 <ProfileForm patient={patient} />
                 <Button type='primary'>Save Changes</Button>
-              </div>
+              </div> */}
             </div>
           </div>
           

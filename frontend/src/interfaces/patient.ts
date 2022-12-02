@@ -46,7 +46,20 @@ export interface IPatient {
   treatmentPrice?:number,
   treatmentDiscount?: number,
   treatmentTotal?: number,
- 
+  test?:any,
+  // inputList?:input[],
+  inputList?: {
+    test: string;
+}[],
+friends?: [
+  {
+    name:string,
+    email: string,
+  },
+],
+}
+export interface input{
+  test?:any,
 }
 export interface IAppointment {
   // id?: string;
