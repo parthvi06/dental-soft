@@ -249,3 +249,7 @@ input.ant-input.medic-dosage {
     -webkit-animation-name: rubberBand;
     animation-name: rubberBand;
   }
+
+/*** Patient Profile Page ***/
+.patient_file label{ padding-left: 10px;}
+.patient_file .col-sm-4{ margin-top: 10px;}

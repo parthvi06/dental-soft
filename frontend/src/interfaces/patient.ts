@@ -26,27 +26,27 @@ export interface IPatient {
   investigation?: any;
   diagnosis?: any;
   notes?: any;
-  surface?: string,
-  top?: string,
+  surface?: string;
+  top?: string;
   pop?: string,
-  sensitivity?: string,
-  conclusion?: string,
-  price?: number,
-  discount?: number,
-  totalprice?: number,
-  treatment?: string,
-  drug?:string
-  am?:string,
-  noon?:string,
-  pm?:string,
-  totalqty?:string,
-  food?:string,
+  sensitivity?: string;
+  conclusion?: string;
+  price?: number;
+  discount?: number;
+  totalprice?: number;
+  treatment?: string;
+  drug?:any;
+  am?:string;
+  noon?:string;
+  pm?:string;
+  totalqty?:string;
+  food?:string;
   instruction?:string;
-  treatmentCheckbox?:any
-  treatmentPrice?:number,
-  treatmentDiscount?: number,
-  treatmentTotal?: number,
-  test?:any,
+  treatmentCheckbox?:any;
+  treatmentPrice?:number;
+  treatmentDiscount?: number;
+  treatmentTotal?: number;
+  test?:any;
   // inputList?:input[],
   inputList?: {
     test: string;

@@ -25,6 +25,20 @@
     "routing": "seatallotment"
   },
   {
+    "title": "Lab",
+    "icon": {
+      "class": "icofont-sign-in"
+    },
+    "routing": "lab"
+  },
+  {
+    "title": "Inventory",
+    "icon": {
+      "class": "icofont-sign-in"
+    },
+    "routing": "inventory"
+  },
+  {
     "title": "Appointments",
     "icon": {
       "class": "icofont-patient-file"

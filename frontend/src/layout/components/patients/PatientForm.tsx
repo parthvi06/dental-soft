@@ -96,7 +96,6 @@ const PatientForm = ({
   const handleSensitivitySelect = (value) => setFieldValue('sensitivity', value);
   const handleConclusionSelect = (value) => setFieldValue('conclusion', value);
   const handleTreatmentSelect = (value) => setFieldValue('treatment', value);
-  // const handleDrugSelect = (value) => setFieldValue('drug', value);
   const handleFoodSelect = (value) => setFieldValue('food', value);
   const hasError = hasErrorFactory(touched, errors);
 
@@ -872,30 +871,30 @@ const PatientForm = ({
                     defaultValue={values.drug}
                     onChange={handleDrugSelect}
                   >
-                    <Select.Option value=' Fol-5 5 mg'> Fol-5 5 mg</Select.Option>
-                    <Select.Option value='Tablets Novaclox 250 mg'>Tablets Novaclox 250 mg</Select.Option>
-                    <Select.Option value='Tablets Novaclox 125 mg'>Tablets Novaclox 125 mg</Select.Option>
-                    <Select.Option value='Tablets Novamox 250 mg'>Tablets Novamox 250 mg</Select.Option>
-                    <Select.Option value='Tablets Novamox 125 mg'>Tablets Novamox 125 mg</Select.Option>
-                    <Select.Option value='Gargle Betadine Gargle 2 % w/v'>Gargle Betadine Gargle 2 % w/v</Select.Option>
-                    <Select.Option value='Injection Flumazenil 0.1 mg'>Injection Flumazenil 0.1 mg</Select.Option>
-                    <Select.Option value='Tablets Amoxicillin 250mg*'>Tablets Amoxicillin 250mg*</Select.Option>
-                    <Select.Option value='Tablets Amoxicillin 500mg*'>Tablets Amoxicillin 500mg*</Select.Option>
-                    <Select.Option value='Tablets Metrogyl 200 mg'>Tablets Metrogyl 200 mg</Select.Option>
-                    <Select.Option value='Tablets Metrogyl 400 mg'>Tablets Metrogyl 400 mg</Select.Option>
-                    <Select.Option value='Tablets Flagyl 200 mg'>Tablets Flagyl 200 mg</Select.Option>
-                    <Select.Option value='Tablets Flagyl 400 mg'>Tablets Flagyl 400 mg</Select.Option>
-                    <Select.Option value='Tablets Crocin 250 mg'>Tablets Crocin 250 mg</Select.Option>
-                    <Select.Option value='Tablets Cetrizin 150 mg'>Tablets Cetrizin 150 mg</Select.Option>
-                    <Select.Option value='Tablets Cetrizin 25 mg'>Tablets Cetrizin 25 mg</Select.Option>
-                    <Select.Option value='Celcox 100mg'> Celcox 100mg</Select.Option>
-                    <Select.Option value='Tablets Campicilin 250 mg'>Tablets Campicilin 250 mg</Select.Option>
-                    <Select.Option value='Tablets Geeox 100 mg'>Tablets Geeox 100 mg</Select.Option>
-                    <Select.Option value='Gargle Candid Mouth Paint Solution'>Gargle Candid Mouth Paint Solution</Select.Option>
-                    <Select.Option value='Tablets Voveran 75 mg'>Tablets Voveran 75 mg</Select.Option>
-                    <Select.Option value='Tablets Novomax 500 mg'>Tablets Novomax 500 mg</Select.Option>
-                    <Select.Option value='Instructions'>Instructions</Select.Option>
-                    <Select.Option value='Lab Investigations'>Lab Investigations</Select.Option>
+                    <Option value=' Fol-5 5 mg'> Fol-5 5 mg</Option>
+                    <Option value='Tablets Novaclox 250 mg'>Tablets Novaclox 250 mg</Option>
+                    <Option value='Tablets Novaclox 125 mg'>Tablets Novaclox 125 mg</Option>
+                    <Option value='Tablets Novamox 250 mg'>Tablets Novamox 250 mg</Option>
+                    <Option value='Tablets Novamox 125 mg'>Tablets Novamox 125 mg</Option>
+                    <Option value='Gargle Betadine Gargle 2 % w/v'>Gargle Betadine Gargle 2 % w/v</Option>
+                    <Option value='Injection Flumazenil 0.1 mg'>Injection Flumazenil 0.1 mg</Option>
+                    <Option value='Tablets Amoxicillin 250mg*'>Tablets Amoxicillin 250mg*</Option>
+                    <Option value='Tablets Amoxicillin 500mg*'>Tablets Amoxicillin 500mg*</Option>
+                    <Option value='Tablets Metrogyl 200 mg'>Tablets Metrogyl 200 mg</Option>
+                    <Option value='Tablets Metrogyl 400 mg'>Tablets Metrogyl 400 mg</Option>
+                    <Option value='Tablets Flagyl 200 mg'>Tablets Flagyl 200 mg</Option>
+                    <Option value='Tablets Flagyl 400 mg'>Tablets Flagyl 400 mg</Option>
+                    <Option value='Tablets Crocin 250 mg'>Tablets Crocin 250 mg</Option>
+                    <Option value='Tablets Cetrizin 150 mg'>Tablets Cetrizin 150 mg</Option>
+                    <Option value='Tablets Cetrizin 25 mg'>Tablets Cetrizin 25 mg</Option>
+                    <Option value='Celcox 100mg'> Celcox 100mg</Option>
+                    <Option value='Tablets Campicilin 250 mg'>Tablets Campicilin 250 mg</Option>
+                    <Option value='Tablets Geeox 100 mg'>Tablets Geeox 100 mg</Option>
+                    <Option value='Gargle Candid Mouth Paint Solution'>Gargle Candid Mouth Paint Solution</Option>
+                    <Option value='Tablets Voveran 75 mg'>Tablets Voveran 75 mg</Option>
+                    <Option value='Tablets Novomax 500 mg'>Tablets Novomax 500 mg</Option>
+                    <Option value='Instructions'>Instructions</Option>
+                    <Option value='Lab Investigations'>Lab Investigations</Option>
                   </Select>
                 </div>
               </div>

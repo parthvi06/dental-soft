@@ -32,7 +32,7 @@ const patientSchema = new mongoose.Schema({
   discount: {type: Number},
   totalprice: {type:Number},
   treatment: {type: String},
-  drug: {type: String},
+  drug: [String],
   am: {type: String},
   noon: {type: String},
   pm: {type: String},
